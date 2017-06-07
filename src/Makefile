@@ -19,7 +19,7 @@ ifeq ($(ARCH),)
 endif
 
 ifeq ($(COMP),)
-	COMP = icc
+	COMP = gcc
 endif
 
 ifeq ($(OS),)
@@ -277,7 +277,7 @@ help:
 	@echo "make target [ARCH=cpu] [COMP=compiler] [OS=os]"
 	@echo ""
 	@echo "Targets:"
-	@echo "   build*     Build optimized version"
+	@echo "   build      Build optimized version"
 	@echo "   pgo-build  Build PGO-optimized version"
 	@echo "   release    Cross compile for linux/windows/mac (from fedora only)"
 	@echo "   debug      Build debug version."
@@ -294,10 +294,10 @@ help:
 	@echo " ARMv7        ARM v7-a"
 	@echo ""
 	@echo "Compilers:"
-	@echo "   gcc        GNU C compiler version >= 4.6"
+	@echo "   gcc*       GNU C compiler version >= 4.6"
 	@echo "   gcc-old    GNU C compiler version >= 3.0"
 	@echo "   g++        GNU C++ compiler version >= 4.6"
-	@echo "   icc*       Intel C Compiler"
+	@echo "   icc        Intel C Compiler"
 	@echo "   clang      Clang Compiler"
 	@echo ""
 	@echo "Oses:"
