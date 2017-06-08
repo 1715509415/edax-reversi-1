@@ -158,6 +158,7 @@ void search_set_task_number(Search*, const int);
 
 void search_swap_parity(Search*, const int);
 void search_get_movelist(const Search*, MoveList*);
+void board_get_movelist(const Board*, MoveList*);
 void search_update_endgame(Search*, const Move*);
 void search_restore_endgame(Search*, const Move*);
 void search_pass_endgame(Search*);

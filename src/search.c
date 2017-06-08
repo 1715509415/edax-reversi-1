@@ -868,9 +868,14 @@ void search_swap_parity(Search *search, const int x)
  */
 void search_get_movelist(const Search *search, MoveList *movelist)
 {
+	const Board *board = search->board;
+  board_get_movelist(board, movelist);
+}
+
+void board_get_movelist(const Board *board, MoveList *movelist)
+{
 	Move *previous = movelist->move;
 	Move *move = movelist->move + 1;
-	const Board *board = search->board;
 	unsigned long long moves = get_moves(board->player, board->opponent);
 	register int x;
 

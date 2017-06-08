@@ -38,6 +38,7 @@
  *   -play <moves>        play a sequence of moves.
  *   -force <moves>       force to play an opening.
  *   -go                  ask edax to play.
+ *   -moves               display all valid moves
  *   -stop                stop edax search.
  *   -hint [n]            ask edax to search the first bestmoves.
  *   -m|mode [n]          ask edax to automatically play (default = 3).
@@ -204,6 +205,7 @@ void help_commands(void)
 	printf("  play <moves>        play a sequence of moves.\n");
 	printf("  force <moves>       force to play an opening.\n");
 	printf("  go                  ask edax to play.\n");
+	printf("  moves               display all valid moves.\n");
 	printf("  stop                stop edax search.\n");
 	printf("  hint [n]            ask edax to search the first bestmoves.\n");
 	printf("  m|mode [n]          ask edax to automatically play (default = 3).\n");
@@ -550,6 +552,26 @@ void ui_loop_edax(UI *ui)
 					printf("\nEdax plays "); move_print(play_get_last_move(play)->x, 0, stdout); putchar('\n');
 				}
 
+      // move list
+      } else if (strcmp(cmd, "moves") == 0) {
+				if (play_is_game_over(play)) printf("\n*** Game Over ***\n");
+				else {
+          MoveList moveList[1];
+          board_get_movelist(play->board, moveList);
+          Move* move = moveList[0].move;
+          // the first move is empty, skip it
+          if (move) {
+            move = move->next;
+          }
+          // print all moves
+          while (move) {
+            move_print(move->x, play->player, stdout);
+            move = move->next;
+            if (move)
+              printf(",");
+          }
+          printf("\n");
+        }
 			// hint for [n] moves
 			} else if (strcmp(cmd, "hint") == 0) {
 				int n = string_to_int(param, 1); BOUND(n, 1, 60, "n_moves");
