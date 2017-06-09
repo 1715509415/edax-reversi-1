@@ -563,14 +563,19 @@ void ui_loop_edax(UI *ui)
           if (move) {
             move = move->next;
           }
-          // print all moves
-          while (move) {
-            move_print(move->x, play->player, stdout);
-            move = move->next;
-            if (move)
-              printf(",");
+          if (!move) {
+            printf("no move\n");
+          } else {
+            // print all moves
+            printf("moves:");
+            while (move) {
+              move_print(move->x, play->player, stdout);
+              move = move->next;
+              if (move)
+                printf(",");
+            }
+            printf("\n");
           }
-          printf("\n");
         }
 			// hint for [n] moves
 			} else if (strcmp(cmd, "hint") == 0) {
