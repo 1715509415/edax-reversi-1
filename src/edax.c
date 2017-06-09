@@ -311,8 +311,9 @@ void ui_loop_edax(UI *ui)
 		// edax turn ? (automatic play mode)
 		if (!ui_event_exist(ui) && !play_is_game_over(play) && (ui->mode == !play->player || ui->mode == 2)) {
 			putchar('\n');
+      int current_player = play->player;
 			play_go(play, true);
-			printf("\nEdax plays "); move_print(play_get_last_move(play)->x, 0, stdout); putchar('\n');
+			printf("\nEdax plays "); move_print(play_get_last_move(play)->x, current_player, stdout); putchar('\n');
 			if (ui->mode != 2) play_ponder(play);
 
 		// proceed by reading a command
@@ -548,8 +549,9 @@ void ui_loop_edax(UI *ui)
 			} else if (strcmp(cmd, "go") == 0) {
 				if (play_is_game_over(play)) printf("\n*** Game Over ***\n");
 				else {
+          int current_player = play->player;
 					play_go(play, true);
-					printf("\nEdax plays "); move_print(play_get_last_move(play)->x, 0, stdout); putchar('\n');
+					printf("\nEdax plays "); move_print(play_get_last_move(play)->x, current_player, stdout); putchar('\n');
 				}
 
       // move list
