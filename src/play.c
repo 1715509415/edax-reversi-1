@@ -601,6 +601,27 @@ void play_set_board(Play *play, const char *board)
 }
 
 /**
+ * get board and current player
+ */
+void play_get_board(Play * play, char* board)
+{
+  unsigned long long player_board = play->board->player;
+  unsigned long long opponent_board = play->board->opponent;
+  for (int i=0; i<64; ++i) {
+    if ((player_board & 1) != 0) {
+      board[i] = play->player == BLACK? 'b' : 'w';
+    } else if ((opponent_board & 1) != 0) {
+      board[i] = play->player == BLACK? 'w' : 'b';
+    } else {
+      board[i] = '.';
+    }
+    player_board >>= 1;
+    opponent_board >>= 1;
+  }
+  board[64] = play->player == BLACK? 'b' : 'w';
+}
+
+/**
  * @brief Set a new board.
  * @param play Play.
  * @param board A new board.

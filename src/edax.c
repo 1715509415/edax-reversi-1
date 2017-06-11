@@ -30,6 +30,7 @@
  *   -i|nit               start a new game from standard initial position.
  *   -n|ew                start a new game from a personalized position.
  *   -setboard <board>    set a personalized position to start from.
+ *   -getboard            get current position and player.
  *   -o|open|load [file]  load a played game.
  *   -s|save [file]       save a played game.
  *   -q|quit|exit         quit from edax.
@@ -197,6 +198,7 @@ void help_commands(void)
 	printf("  i|nit               start a new game from standard initial position.\n");
 	printf("  n|ew                start a new game from a personalized position.\n");
 	printf("  setboard <board>    set a personalized position to start from.\n");
+	printf("  getboard            get current position and player.\n");
 	printf("  o|open|load [file]  load a played game.\n");
 	printf("  s|save [file]       save a played game.\n");
 	printf("  q|quit|exit         quit from edax.\n");
@@ -406,6 +408,12 @@ void ui_loop_edax(UI *ui)
 			} else if (strcmp(cmd, "setboard") == 0) {
 				play_set_board(play, param);
 
+      // get board
+      } else if (strcmp(cmd, "getboard") == 0) {
+        char b[66];
+        play_get_board(play, b);
+        b[65] = '\0';
+        printf("board:%s\n", b);
 			// vertical mirror
 			} else if (strcmp(cmd, "vmirror") == 0) {
 				play_symetry(play, 2);
